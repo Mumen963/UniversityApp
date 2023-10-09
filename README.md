@@ -10,4 +10,3 @@
 - *As a user, I want to be able to select a student in a faculty and add GPA to him*
 
 
-
