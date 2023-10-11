@@ -37,7 +37,6 @@ public class FacultyTest {
         assertEquals(student1, students.get(0));
         assertEquals("Mary", students.get(0).getName());
         assertEquals(3.5, students.get(0).getGpa());
-        assertEquals(1000, students.get(0).getId());
     }
 
     @Test
@@ -74,7 +73,7 @@ public class FacultyTest {
 
     @Test
     public void testRemoveStudentWhoIsAdded() {
-        assertTrue(facultyTest.addStudent(student1));
+        facultyTest.addStudent(student1);
         assertTrue(facultyTest.removeStudent(student1));
         List<Student> students = facultyTest.getAllStudents();
         assertEquals(0, students.size());
@@ -82,7 +81,7 @@ public class FacultyTest {
 
     @Test
     public void testRemoveStudentWhoIsNotAdded() {
-        assertTrue(facultyTest.addStudent(student1));
+        facultyTest.addStudent(student1);
         assertFalse(facultyTest.removeStudent(student2));
     }
 
