@@ -23,7 +23,7 @@ public class Faculty {
     // and return false. items are maintained in the order in
     // which they were added
     public boolean addStudent(Student student) {
-        if(!students.contains(student)) {
+        if (!students.contains(student)) {
             students.add(student);
             return true;
         }
