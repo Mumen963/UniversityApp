@@ -30,4 +30,10 @@ public class StudentTest {
         assertEquals(1001, student2.getId());
         assertEquals(1002, student3.getId());
     }
+
+    @Test
+    public void testSetGpa() {
+        student1.setGpa(1.3);
+        assertEquals(1.3,student1.getGpa());
+    }
 }
