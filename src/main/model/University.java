@@ -23,11 +23,13 @@ public class University {
     // and return false. items are maintained in the order
     // in which they were added
     public boolean addFaculty(Faculty faculty) {
-        if (!faculties.contains(faculty)) {
-            faculties.add(faculty);
-            return true;
+        for (Faculty f : faculties) {
+            if (faculty.getName().equals(f.getName())) {
+                return false;
+            }
         }
-        return false;
+        faculties.add(faculty);
+        return true;
     }
 
     // EFFECTS: returns the name of the university

@@ -11,13 +11,7 @@ import java.util.Scanner;
 public class UniversityApp {
 
     private University university;
-    private Faculty science;
-    private Faculty arts;
-    private Student mari;
-    private Student sara;
-    private Student dave;
-
-    private final Scanner input = new Scanner(System.in);
+    private Scanner input;
 
     // runs the university app
     public UniversityApp() {
@@ -29,7 +23,7 @@ public class UniversityApp {
     private void runUniversity() {
         System.out.println("\nWelcome to UBC!");
         boolean keepGoing = true;
-        int command = 0;
+        int command;
 
         init();
 
@@ -49,14 +43,15 @@ public class UniversityApp {
     //MODIFIES : this
     //EFFECTS : initializes university having two faculties with students
     private void init() {
+        input = new Scanner(System.in);
         university = new University("Bright Future University");
-        science = new Faculty("Science");
-        arts = new Faculty("Arts");
+        Faculty science = new Faculty("Science");
+        Faculty arts = new Faculty("Arts");
         university.addFaculty(science);
         university.addFaculty(arts);
-        mari = new Student("Mari", 3.4);
-        sara = new Student("Sara", 3.8);
-        dave = new Student("Dave", 2.8);
+        Student mari = new Student("Mari", 3.4);
+        Student sara = new Student("Sara", 3.8);
+        Student dave = new Student("Dave", 2.8);
         science.addStudent(mari);
         science.addStudent(sara);
         arts.addStudent(dave);
@@ -76,7 +71,7 @@ public class UniversityApp {
         System.out.println("9 -> quit");
     }
 
-    //MODIFIES: this
+    //REQUIRES : numerical input
     //EFFECTS: process user command
     private void processCommand(int command) {
         if (command == 1) {
@@ -96,7 +91,7 @@ public class UniversityApp {
         } else if (command == 8) {
             displayStudentInfo();
         } else {
-            System.out.println("Selection not valid...");
+            System.out.println("Selection is not valid...");
         }
     }
 
@@ -107,11 +102,12 @@ public class UniversityApp {
         }
     }
 
+    //REQUIRES : faculty name has non zero length
     //MODIFIES: this
     //EFFECTS: conducts adding a faculty
     private void addNewFaculty() {
-        String facultyName = null;
-        System.out.println("Please enter the name of your faculty:");
+        String facultyName;
+        System.out.println("Please enter the name of your faculty: ");
         facultyName = input.next();
         university.addFaculty(new Faculty(facultyName));
         System.out.println("Done!");
@@ -153,27 +149,31 @@ public class UniversityApp {
         return 0;
     }
 
+    //REQUIRES : student name has non-zero length
+    // this :
     //EFFECTS : creates a new student to be added to a faculty
     private Student createNewStudent() {
-        String studentName = null;
-        double gpa = 0;
-        System.out.println("Please enter student name:");
+        String studentName;
+        double gpa;
+        System.out.println("Please enter student name: ");
         studentName = input.next();
         gpa = getValidGpa();
         return new Student(studentName, gpa);
     }
 
+    //REQUIRES : faculty/student names are already added
+    // input has non-zero length
     //MODIFIES : this
     //EFFECTS : remove a student from a chosen faculty
     private void removeStudent() {
         String facultyName = getFacultyName();
         int indexChosenFaculty = getFacultyIndex(facultyName);
-        String studentName = null;
+        String studentName;
         System.out.println("Write the name of the student you wish to remove");
         displayStudents(indexChosenFaculty);
         studentName = input.next();
 
-        if (!isStudentAdded(indexChosenFaculty, studentName)) {
+        if (isStudentNotAdded(indexChosenFaculty, studentName)) {
             System.out.println("Student is not added");
         } else {
             processRemoving(indexChosenFaculty, studentName);
@@ -181,10 +181,12 @@ public class UniversityApp {
         System.out.println("Done!");
     }
 
+    //REQUIRES : faculty is already added to the list of faculties
+    //input has non-zero length
     //EFFECTS : prompts the user to enter the faculty name until
     //it matches an existing faculty name and return it
     private String getFacultyName() {
-        String facultyName = null;
+        String facultyName;
         System.out.println("Write the name of student's faculty");
         displayFaculties();
         facultyName = input.next();
@@ -198,14 +200,14 @@ public class UniversityApp {
 
     //EFFECTS : return true if the student is added to a given faculty
     //false otherwise
-    private boolean isStudentAdded(int indexChosenFaculty, String studentName) {
+    private boolean isStudentNotAdded(int indexChosenFaculty, String studentName) {
         List<Student> students = getStudents(indexChosenFaculty);
         for (Student s : students) {
             if (studentName.equals(s.getName())) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     //EFFECTS : display all students in a given faculty
@@ -273,14 +275,15 @@ public class UniversityApp {
 
     }
 
+    //REQUIRES : input has non-zero length, student name already added
     //EFFECTS : prompts the user to enter a student name until
     //it matches an existing student name and return the student object
     private Student getStudent(int indexChosenFaculty, List<Student> students) {
-        String studentName = null;
+        String studentName;
         System.out.println("Please enter student name:");
         studentName = input.next();
 
-        while (!isStudentAdded(indexChosenFaculty, studentName)) {
+        while (isStudentNotAdded(indexChosenFaculty, studentName)) {
             System.out.println("Student name is invalid, try again...");
             studentName = input.next();
         }
@@ -289,10 +292,11 @@ public class UniversityApp {
         return students.get(studentIndex);
     }
 
+    //REQUIRES : numerical input
     //EFFECTS : prompts the user to enter a gpa util
-    //it;s within the specified range
+    //it's within the specified range
     private double getValidGpa() {
-        double gpa = 0.0;
+        double gpa;
         System.out.println("Enter the student's gpa: ");
         gpa = input.nextDouble();
         while (gpa > 4 || gpa < 0) {
