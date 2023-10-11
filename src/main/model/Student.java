@@ -30,7 +30,9 @@ public class Student {
         return this.gpa;
     }
 
-    public void setGpa(double gpa) { this.gpa = gpa; }
+    public void setGpa(double gpa) {
+        this.gpa = gpa;
+    }
 
 
 }
