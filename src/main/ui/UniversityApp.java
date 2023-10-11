@@ -96,7 +96,7 @@ public class UniversityApp {
         } else if (command == 8) {
             displayStudentInfo();
         } else {
-            System.out.println("Selection not valid...");
+            System.out.println("Selection is not valid...");
         }
     }
 
