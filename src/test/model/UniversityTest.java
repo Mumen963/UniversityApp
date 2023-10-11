@@ -32,7 +32,7 @@ class UniversityTest {
 
     @Test
     public void testAddFacultyOnce() {
-        universityTest.addFaculty(faculty1);
+        assertTrue(universityTest.addFaculty(faculty1));
         List<Faculty> faculties = universityTest.getAllFaculties();
         assertEquals(1, faculties.size());
         assertEquals(faculty1, faculties.get(0));
@@ -41,9 +41,9 @@ class UniversityTest {
 
     @Test
     public void testAddFacultyMultipleTimes() {
-        universityTest.addFaculty(faculty1);
-        universityTest.addFaculty(faculty2);
-        universityTest.addFaculty(faculty3);
+        assertTrue(universityTest.addFaculty(faculty1));
+        assertTrue(universityTest.addFaculty(faculty2));
+        assertTrue(universityTest.addFaculty(faculty3));
         List<Faculty> faculties = universityTest.getAllFaculties();
         assertEquals(3, faculties.size());
         assertEquals(faculty1, faculties.get(0));

@@ -34,6 +34,6 @@ public class StudentTest {
     @Test
     public void testSetGpa() {
         student1.setGpa(1.3);
-        assertEquals(1.3,student1.getGpa());
+        assertEquals(1.3, student1.getGpa());
     }
 }
