@@ -16,8 +16,7 @@ public class UniversityApp {
     private Student mari;
     private Student sara;
     private Student dave;
-
-    private final Scanner input = new Scanner(System.in);
+    private Scanner input;
 
     // runs the university app
     public UniversityApp() {
@@ -49,6 +48,7 @@ public class UniversityApp {
     //MODIFIES : this
     //EFFECTS : initializes university having two faculties with students
     private void init() {
+        input = new Scanner(System.in);
         university = new University("Bright Future University");
         science = new Faculty("Science");
         arts = new Faculty("Arts");
@@ -76,7 +76,7 @@ public class UniversityApp {
         System.out.println("9 -> quit");
     }
 
-    //MODIFIES: this
+    //REQUIRES : numerical input
     //EFFECTS: process user command
     private void processCommand(int command) {
         if (command == 1) {
@@ -107,6 +107,7 @@ public class UniversityApp {
         }
     }
 
+    //REQUIRES : faculty name has non zero length
     //MODIFIES: this
     //EFFECTS: conducts adding a faculty
     private void addNewFaculty() {
@@ -153,6 +154,8 @@ public class UniversityApp {
         return 0;
     }
 
+    //REQUIRES : student name has non zero length
+    // this :
     //EFFECTS : creates a new student to be added to a faculty
     private Student createNewStudent() {
         String studentName = null;
@@ -163,6 +166,7 @@ public class UniversityApp {
         return new Student(studentName, gpa);
     }
 
+    //REQUIRES : faculty/student names are already added
     //MODIFIES : this
     //EFFECTS : remove a student from a chosen faculty
     private void removeStudent() {
@@ -181,6 +185,7 @@ public class UniversityApp {
         System.out.println("Done!");
     }
 
+    //REQUIRES : faculty is already added to the list of faculties
     //EFFECTS : prompts the user to enter the faculty name until
     //it matches an existing faculty name and return it
     private String getFacultyName() {
@@ -289,8 +294,9 @@ public class UniversityApp {
         return students.get(studentIndex);
     }
 
+    //REQUIRES : numerical input
     //EFFECTS : prompts the user to enter a gpa util
-    //it;s within the specified range
+    //it's within the specified range
     private double getValidGpa() {
         double gpa = 0.0;
         System.out.println("Enter the student's gpa: ");
