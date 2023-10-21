@@ -272,7 +272,6 @@ public class UniversityApp {
         double gpa = getValidGpa();
         student.setGpa(gpa);
         System.out.println("Done!");
-
     }
 
     //REQUIRES : input has non-zero length, student name already added
@@ -316,5 +315,4 @@ public class UniversityApp {
         System.out.println("\t" + student.getName() + "'s ID is: " + student.getId());
         System.out.println("\t" + student.getName() + "'s GPA is: " + student.getGpa());
     }
-
 }
