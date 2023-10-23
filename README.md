@@ -11,8 +11,8 @@
 - *As a user, I want to be able to select a faculty and get number of students in it*
 - *As a user, I want to be able to select a student in a faculty and add GPA to him*
 - *As a user, I want to be able to select a student in a faculty and gets his info*
-- *As a user, I want to have the option to save my university data to a file when quitting the application*
-- *As a user, I want to be given the option to load my university data from a file when starting the application*
+- *As a user, I want to have the option to save my university data to a file*
+- *As a user, I want to have the option to load my university data from a file*
 
 
 

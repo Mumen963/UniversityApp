@@ -3,18 +3,25 @@ package ui;
 import model.Faculty;
 import model.Student;
 import model.University;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 //University Enrolment System application
 public class UniversityApp {
 
+    private static final String JSON_STORE = "./data/university.json";
     private University university;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
     private Scanner input;
 
     // runs the university app
-    public UniversityApp() {
+    public UniversityApp() throws FileNotFoundException {
         runUniversity();
     }
 
@@ -31,7 +38,7 @@ public class UniversityApp {
             displayMenu();
             command = input.nextInt();
 
-            if (command == 9) {
+            if (command == 11) {
                 keepGoing = false;
             } else {
                 processCommand(command);
@@ -44,6 +51,8 @@ public class UniversityApp {
     //EFFECTS : initializes university having two faculties with students
     private void init() {
         input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         university = new University("Bright Future University");
         Faculty science = new Faculty("Science");
         Faculty arts = new Faculty("Arts");
@@ -68,7 +77,9 @@ public class UniversityApp {
         System.out.println("6 -> get number of students in a faculty");
         System.out.println("7 -> add a new GPA for a student in a faculty");
         System.out.println("8 -> get a student info");
-        System.out.println("9 -> quit");
+        System.out.println("9 - > save university data to file");
+        System.out.println("10 - > load university data from file");
+        System.out.println("11 -> quit");
     }
 
     //REQUIRES : numerical input
@@ -90,6 +101,10 @@ public class UniversityApp {
             addGPA();
         } else if (command == 8) {
             displayStudentInfo();
+        } else if (command == 9) {
+            saveUniversityData();
+        } else if (command == 10) {
+            loadUniversityData();
         } else {
             System.out.println("Selection is not valid...");
         }
@@ -315,4 +330,25 @@ public class UniversityApp {
         System.out.println("\t" + student.getName() + "'s ID is: " + student.getId());
         System.out.println("\t" + student.getName() + "'s GPA is: " + student.getGpa());
     }
+
+    private void saveUniversityData() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(university);
+            jsonWriter.close();
+            System.out.println("Saved " + university.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    private void loadUniversityData() {
+        try {
+            university = jsonReader.read();
+            System.out.println("Loaded " + university.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
 }

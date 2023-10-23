@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // represent a faculty having a name and a list of students
-public class Faculty {
+public class Faculty implements Writable {
 
     private String name;            // name of the faculty
     private List<Student> students; // the faculty students
@@ -51,6 +55,26 @@ public class Faculty {
     public List<Student> getAllStudents() {
         return students;
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("students", studentsToJson());
+        return json;
+    }
+
+//EFFECTS: returns students in this faculty as a JSON array
+    private JSONArray studentsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Student s : students) {
+            jsonArray.put(s.toJson());
+        }
+
+        return jsonArray;
+    }
+
 
 
 }

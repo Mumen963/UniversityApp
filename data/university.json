@@ -1,0 +1,42 @@
+{
+    "name": "Bright Future University",
+    "faculties": [
+        {
+            "name": "Science",
+            "students": [
+                {
+                    "name": "Mari",
+                    "gpa": 3.4
+                },
+                {
+                    "name": "Sara",
+                    "gpa": 3.8
+                }
+            ]
+        },
+        {
+            "name": "Arts",
+            "students": [{
+                "name": "Dave",
+                "gpa": 2.8
+            }]
+        },
+        {
+            "name": "Bio",
+            "students": [
+                {
+                    "name": "Mo",
+                    "gpa": 1.2
+                },
+                {
+                    "name": "Alex",
+                    "gpa": 2.3
+                },
+                {
+                    "name": "Mira",
+                    "gpa": 3.5
+                }
+            ]
+        }
+    ]
+}

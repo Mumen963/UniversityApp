@@ -1,0 +1,7 @@
+{
+  "name": "My university",
+  "faculties": [
+    {"name": "Forestry"},
+    {"name": "Bio"}
+  ]
+}
