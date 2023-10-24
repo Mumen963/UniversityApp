@@ -2,6 +2,7 @@ package persistence;
 
 import com.sun.security.auth.UnixNumericGroupPrincipal;
 import model.Faculty;
+import model.Student;
 import model.University;
 import org.junit.jupiter.api.Test;
 
@@ -46,8 +47,14 @@ public class JsonWriterTest {
     void testWriterGeneralWorkroom() {
         try {
             University university = new University("My university");
-            university.addFaculty(new Faculty("History"));
-            university.addFaculty(new Faculty("Physics"));
+            Faculty chem = new Faculty("Chem");
+            chem.addStudent(new Student("Sali", 2.2));
+            chem.addStudent(new Student("Mira", 1.9));
+            Faculty math = new Faculty("Math");
+            math.addStudent(new Student("Josef", 3.5));
+            math.addStudent(new Student("Ebro", 3.4));
+            university.addFaculty(chem);
+            university.addFaculty(math);
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralUniversity.json");
             writer.open();
             writer.write(university);
@@ -58,8 +65,18 @@ public class JsonWriterTest {
             assertEquals("My university", university.getName());
             List<Faculty> faculties = university.getAllFaculties();
             assertEquals(2, faculties.size());
-            assertEquals("History", university.getAllFaculties().get(0).getName());
-            assertEquals("Physics", university.getAllFaculties().get(1).getName());
+            assertEquals("Chem", faculties.get(0).getName());
+            assertEquals("Math", faculties.get(1).getName());
+            List<Student> studentsC = faculties.get(0).getAllStudents();
+            List<Student> studentsM = faculties.get(1).getAllStudents();
+            assertEquals("Sali", studentsC.get(0).getName());
+            assertEquals("Mira", studentsC.get(1).getName());
+            assertEquals(2.2, studentsC.get(0).getGpa());
+            assertEquals(1.9, studentsC.get(1).getGpa());
+            assertEquals("Josef", studentsM.get(0).getName());
+            assertEquals("Ebro", studentsM.get(1).getName());
+            assertEquals(3.5, studentsM.get(0).getGpa());
+            assertEquals(3.4, studentsM.get(1).getGpa());
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");

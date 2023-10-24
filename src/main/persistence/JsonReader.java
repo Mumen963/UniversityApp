@@ -69,16 +69,9 @@ public class JsonReader {
         addStudents(faculty, jsonObject);
     }
 
-//    // EFFECTS: parses Faculty data from JSON object and returns it
-//    private Faculty parseFaculty(JSONObject jsonObject) {
-//        String name = jsonObject.getString("name");
-//        Faculty faculty = new Faculty(name);
-//        addStudents(faculty, jsonObject);
-//        return faculty;
-//    }
-//
-//    // MODIFIES: faculty
-//    // EFFECTS: parses students from JSON object and adds them to faculty
+
+    // MODIFIES: faculty
+    // EFFECTS: parses students from JSON object and adds them to faculty
     private void addStudents(Faculty faculty, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("students");
         for (Object json : jsonArray) {
@@ -87,14 +80,12 @@ public class JsonReader {
         }
     }
 
-//
-//    // MODIFIES: faculty
-//    // EFFECTS: parses faculty from JSON object and adds it to university
+    // MODIFIES: faculty
+    // EFFECTS: parses student from JSON object and adds it to faculty
     private void addStudent(Faculty faculty, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         double gpa = jsonObject.getDouble("gpa");
         Student student = new Student(name, gpa);
         faculty.addStudent(student);
     }
-
 }

@@ -1,7 +1,29 @@
 {
   "name": "My university",
   "faculties": [
-    {"name": "Forestry"},
-    {"name": "Bio"}
+    {"name": "Forestry",
+      "students": [
+        {
+          "name": "Joe",
+          "gpa": 3.5
+        },
+        {
+          "name": "Mo",
+          "gpa": 2.5
+        }
+      ]
+    },
+    {"name": "Bio",
+      "students": [
+        {
+          "name": "Eric",
+          "gpa": 2.9
+        },
+        {
+          "name": "Harrison",
+          "gpa": 3.1
+        }
+      ]
+    }
   ]
 }

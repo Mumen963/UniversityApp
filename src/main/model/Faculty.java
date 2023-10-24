@@ -64,7 +64,7 @@ public class Faculty implements Writable {
         return json;
     }
 
-//EFFECTS: returns students in this faculty as a JSON array
+    //EFFECTS: returns students in this faculty as a JSON array
     private JSONArray studentsToJson() {
         JSONArray jsonArray = new JSONArray();
 
@@ -74,7 +74,6 @@ public class Faculty implements Writable {
 
         return jsonArray;
     }
-
 
 
 }

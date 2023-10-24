@@ -38,6 +38,7 @@ public class Student {
         this.gpa = gpa;
     }
 
+    //EFFECTS: returns the student as a json object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
