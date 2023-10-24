@@ -1,6 +1,5 @@
 package persistence;
 
-import com.sun.security.auth.UnixNumericGroupPrincipal;
 import model.Faculty;
 import model.Student;
 import model.University;

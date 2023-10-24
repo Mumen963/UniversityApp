@@ -46,6 +46,7 @@ public class University implements Writable {
         return faculties;
     }
 
+    //EFFECTS: returns university as a JSON Object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

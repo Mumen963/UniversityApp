@@ -56,6 +56,7 @@ public class Faculty implements Writable {
         return students;
     }
 
+    //EFFECTS: return faculty as a JSON Object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
