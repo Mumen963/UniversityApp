@@ -45,7 +45,6 @@ public class JsonReader {
         String name = jsonObject.getString("name");
         University university = new University(name);
         addFaculties(university, jsonObject);
-//        addStudents(university, jsonObject);
         return university;
     }
 
@@ -85,7 +84,9 @@ public class JsonReader {
     private void addStudent(Faculty faculty, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         double gpa = jsonObject.getDouble("gpa");
+        int id = jsonObject.getInt("id");
         Student student = new Student(name, gpa);
+        student.setId(id);
         faculty.addStudent(student);
     }
 }

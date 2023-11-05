@@ -75,6 +75,4 @@ public class Faculty implements Writable {
 
         return jsonArray;
     }
-
-
 }

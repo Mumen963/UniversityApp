@@ -85,28 +85,28 @@ public class UniversityApp {
     //REQUIRES : numerical input
     //EFFECTS: process user command
     private void processCommand(int command) {
-        if (command == 1) {
-            displayFaculties();
-        } else if (command == 2) {
-            addNewFaculty();
-        } else if (command == 3) {
-            addNewStudent();
-        } else if (command == 4) {
-            removeStudent();
-        } else if (command == 5) {
-            displayStudents();
-        } else if (command == 6) {
-            displayNumStudents();
-        } else if (command == 7) {
-            addGPA();
-        } else if (command == 8) {
-            displayStudentInfo();
-        } else if (command == 9) {
-            saveUniversityData();
-        } else if (command == 10) {
-            loadUniversityData();
-        } else {
-            System.out.println("Selection is not valid...");
+        switch (command) {
+            case 1: displayFaculties();
+                break;
+            case 2: addNewFaculty();
+                break;
+            case 3: addNewStudent();
+                break;
+            case 4: removeStudent();
+                break;
+            case 5: displayStudents();
+                break;
+            case 6: displayNumStudents();
+                break;
+            case 7: addGPA();
+                break;
+            case 8: displayStudentInfo();
+                break;
+            case 9: saveUniversityData();
+                break;
+            case 10: loadUniversityData();
+                break;
+            default: System.out.println("Selection is not valid...");
         }
     }
 

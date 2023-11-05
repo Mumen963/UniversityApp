@@ -6,35 +6,28 @@
             "students": [
                 {
                     "name": "Mari",
-                    "gpa": 3.4
+                    "gpa": 3.4,
+                    "id": 1000
                 },
                 {
                     "name": "Sara",
-                    "gpa": 3.8
+                    "gpa": 3.8,
+                    "id": 1001
                 }
             ]
         },
         {
             "name": "Arts",
-            "students": [{
-                "name": "Dave",
-                "gpa": 2.8
-            }]
-        },
-        {
-            "name": "Bio",
             "students": [
                 {
+                    "name": "Dave",
+                    "gpa": 2.8,
+                    "id": 1002
+                },
+                {
                     "name": "Mo",
-                    "gpa": 1.2
-                },
-                {
-                    "name": "Alex",
-                    "gpa": 2.3
-                },
-                {
-                    "name": "Mira",
-                    "gpa": 3.5
+                    "gpa": 2.3,
+                    "id": 1003
                 }
             ]
         }

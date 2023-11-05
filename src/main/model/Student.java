@@ -30,6 +30,10 @@ public class Student {
         return this.id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public double getGpa() {
         return this.gpa;
     }
@@ -43,8 +47,7 @@ public class Student {
         JSONObject json = new JSONObject();
         json.put("name", name);
         json.put("gpa", gpa);
+        json.put("id", id);
         return json;
     }
-
-
 }
