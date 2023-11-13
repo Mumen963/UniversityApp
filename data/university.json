@@ -18,16 +18,24 @@
         },
         {
             "name": "Arts",
+            "students": [{
+                "name": "Dave",
+                "gpa": 2.8,
+                "id": 1002
+            }]
+        },
+        {
+            "name": "Bio",
             "students": [
                 {
-                    "name": "Dave",
-                    "gpa": 2.8,
-                    "id": 1002
+                    "name": "Mo",
+                    "gpa": 3.8,
+                    "id": 1003
                 },
                 {
-                    "name": "Mo",
-                    "gpa": 2.3,
-                    "id": 1003
+                    "name": "Ra",
+                    "gpa": 3.8,
+                    "id": 1004
                 }
             ]
         }
