@@ -115,7 +115,7 @@ public class UniversityGUI extends JFrame {
         studentPanel.add(studentButtonPanel, BorderLayout.SOUTH);
         add(studentPanel, BorderLayout.EAST);
 
-        setSize(800, 300);
+        setSize(550, 300);
         setVisible(true);
     }
 
