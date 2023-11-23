@@ -1,0 +1,31 @@
+{
+    "name": "My university",
+    "faculties": [
+        {
+            "name": "Chem",
+            "students": [
+                {
+                    "name": "Sali",
+                    "gpa": 2.2
+                },
+                {
+                    "name": "Mira",
+                    "gpa": 1.9
+                }
+            ]
+        },
+        {
+            "name": "Math",
+            "students": [
+                {
+                    "name": "Josef",
+                    "gpa": 3.5
+                },
+                {
+                    "name": "Ebro",
+                    "gpa": 3.4
+                }
+            ]
+        }
+    ]
+}

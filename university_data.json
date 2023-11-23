@@ -1,0 +1,21 @@
+{
+    "name": "Bright Future University",
+    "faculties": [
+        {
+            "name": "Science",
+            "students": []
+        },
+        {
+            "name": "Arts",
+            "students": []
+        },
+        {
+            "name": "Forstry",
+            "students": []
+        },
+        {
+            "name": "m",
+            "students": []
+        }
+    ]
+}
