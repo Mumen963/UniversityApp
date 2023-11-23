@@ -7,13 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-
 public class UniversityGUI extends JFrame {
 
     private DefaultListModel<String> facultyListModel;
     private JList<String> facultyList;
     private University university;
-
 
     public UniversityGUI() {
 
