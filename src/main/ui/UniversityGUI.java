@@ -6,10 +6,8 @@ import model.University;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import persistence.Writable;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.*;
