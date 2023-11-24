@@ -9,13 +9,12 @@ import org.json.JSONTokener;
 import persistence.Writable;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 
 // UniversityGUI class represents a graphical user interface for managing faculties and students in a university.
@@ -34,7 +33,7 @@ public class UniversityGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: Initializes the UniversityGUI.
     public UniversityGUI() {
-        super("University GUI");
+        super("University Application");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         university = new University("Bright Future University");
         facultyStudentsMap = new HashMap<>();
@@ -47,11 +46,12 @@ public class UniversityGUI extends JFrame {
         JScrollPane studentScrollPane = new JScrollPane(studentList);
         createAndAddButtons();
         designLayout();
-        setSize(550, 300);
+//        setSize(550, 300);
         setVisible(true);
+        pack();
     }
 
-    // MODIFIES: this
+        // MODIFIES: this
     // EFFECTS: Creates and adds buttons to the GUI.
     private void createAndAddButtons() {
         createButton("Add Faculty", e -> addFaculty());
@@ -264,8 +264,8 @@ public class UniversityGUI extends JFrame {
         add(dataButtonPanel, BorderLayout.SOUTH);
     }
 
-    // EFFECTS: run the UniversityGUI application.
+    // EFFECTS: run the UniversityGUI application after displaying the splash screen.
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new UniversityGUI());
+        SwingUtilities.invokeLater(() -> new SplashScreen(() -> SwingUtilities.invokeLater(UniversityGUI::new)));
     }
 }
