@@ -25,7 +25,7 @@ public class SplashScreen {
 
             JWindow splashScreen = new JWindow();
             splashScreen.getContentPane().add(splashLabel, BorderLayout.CENTER);
-            splashScreen.setSize(splashImage.getIconWidth(), splashImage.getIconHeight());
+            splashScreen.setSize(splashImage.getIconWidth() - 370, splashImage.getIconHeight() - 370);
             splashScreen.setLocationRelativeTo(null);
             splashScreen.setVisible(true);
 
