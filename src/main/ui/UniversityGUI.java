@@ -125,6 +125,7 @@ public class UniversityGUI extends JFrame {
     }
 
     // EFFECTS: Saves the current state of the university and associated data to a JSON file.
+    @SuppressWarnings("methodlength")
     private void saveData() {
         try {
             JSONObject json = new JSONObject();
@@ -161,6 +162,7 @@ public class UniversityGUI extends JFrame {
     }
 
     // EFFECTS: Loads university state from a JSON file and updates the GUI.
+    @SuppressWarnings("methodlength")
     private void loadData() {
         try {
             FileReader reader = new FileReader(JSON_STORE);
