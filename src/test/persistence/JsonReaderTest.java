@@ -25,7 +25,7 @@ public class JsonReaderTest {
     }
 
     @Test
-    void testReaderEmptyWorkRoom() {
+    void testReaderEmptyUniversity() {
         JsonReader reader = new JsonReader("./data/testReaderEmptyUniversity.json");
         try {
             University university = reader.read();
@@ -37,7 +37,7 @@ public class JsonReaderTest {
     }
 
     @Test
-    void testReaderGeneralWorkRoom() {
+    void testReaderGeneralUniversity() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralUniversity.json");
         try {
             University university = reader.read();
