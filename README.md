@@ -14,3 +14,16 @@
 -  *As a user, I want to be able to select a student in a faculty and gets his info*
 -  *As a user, I want to have the option to save my university data to a file*
 -  *As a user, I want to have the option to load my university data from a file*
+
+
+### Instructions for Grader
+
+- You can add faculties to the university using the "Add Faculty" button
+- You can remove any faculty from the university by selecting it and using the "Remove Faculty" button
+- You can add students to any faculty by selecting it and using the "Add Student" button
+- You can remove a student from any faculty by selecting the faculty, then selecting the student and using the "Remove Student" button
+
+- You can locate my visual component by...
+- 
+- You can save the state of my application by using the "Save Data" button
+- You can reload the state of my application by using the "Load Data" button
