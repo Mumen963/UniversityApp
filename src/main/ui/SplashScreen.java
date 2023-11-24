@@ -23,9 +23,12 @@ public class SplashScreen {
             JLabel splashLabel = new JLabel(splashImage);
             splashLabel.setHorizontalAlignment(JLabel.CENTER);
 
+            int splashWidth = splashImage.getIconWidth() - 370;
+            int splashHeight = splashImage.getIconHeight() - 370;
+            
             JWindow splashScreen = new JWindow();
             splashScreen.getContentPane().add(splashLabel, BorderLayout.CENTER);
-            splashScreen.setSize(splashImage.getIconWidth() - 370, splashImage.getIconHeight() - 370);
+            splashScreen.setSize(splashWidth, splashHeight);
             splashScreen.setLocationRelativeTo(null);
             splashScreen.setVisible(true);
 

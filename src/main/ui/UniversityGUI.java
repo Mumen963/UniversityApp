@@ -18,7 +18,6 @@ import java.util.List;
 
 
 // UniversityGUI class represents a graphical user interface for managing faculties and students in a university.
-
 public class UniversityGUI extends JFrame {
 
     private static final String JSON_STORE = "./data/universityGUI.json";
@@ -51,7 +50,7 @@ public class UniversityGUI extends JFrame {
         pack();
     }
 
-        // MODIFIES: this
+    // MODIFIES: this
     // EFFECTS: Creates and adds buttons to the GUI.
     private void createAndAddButtons() {
         createButton("Add Faculty", e -> addFaculty());
