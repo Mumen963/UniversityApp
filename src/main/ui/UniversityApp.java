@@ -26,7 +26,7 @@ public class UniversityApp {
     }
 
     //MODIFIES : this
-    //EFFECTS : process user inout
+    //EFFECTS : process user input
     private void runUniversity() {
         System.out.println("\nWelcome to UBC!");
         boolean keepGoing = true;

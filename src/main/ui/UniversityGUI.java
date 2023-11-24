@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 
+// UniversityGUI class represents a graphical user interface for managing faculties and students in a university.
+
 public class UniversityGUI extends JFrame {
 
     private static final String JSON_STORE = "./data/universityGUI.json";
@@ -27,9 +29,10 @@ public class UniversityGUI extends JFrame {
     private DefaultListModel<String> studentListModel;
     private JList<String> studentList;
     private University university;
-    private Map<String, List<Student>> facultyStudentsMap;
+    private Map<String, List<Student>> facultyStudentsMap;  //For associating faculty names with lists of students
 
-
+    // MODIFIES: this
+    // EFFECTS: Initializes the UniversityGUI.
     public UniversityGUI() {
         super("University GUI");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,10 +47,12 @@ public class UniversityGUI extends JFrame {
         JScrollPane studentScrollPane = new JScrollPane(studentList);
         createAndAddButtons();
         designLayout();
-        setSize(800, 300);
+        setSize(550, 300);
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates and adds buttons to the GUI.
     private void createAndAddButtons() {
         createButton("Add Faculty", e -> addFaculty());
         createButton("Remove Faculty", e -> removeFaculty());
@@ -57,12 +62,16 @@ public class UniversityGUI extends JFrame {
         createButton("Load Data", e -> loadData());
     }
 
+    // REQUIRES: label and actionListener are not null.
+    // EFFECTS: Creates a JButton with the specified label and ActionListener.
     private JButton createButton(String label, ActionListener actionListener) {
         JButton button = new JButton(label);
         button.addActionListener(actionListener);
         return button;
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a new faculty to the university.
     private void addFaculty() {
         String facultyName = JOptionPane.showInputDialog("Enter faculty name:");
         if (facultyName != null && !facultyName.isEmpty()) {
@@ -76,6 +85,8 @@ public class UniversityGUI extends JFrame {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Removes the selected faculty from the university.
     private void removeFaculty() {
         int selectedIndex = facultyList.getSelectedIndex();
         if (selectedIndex != -1) {
@@ -84,6 +95,8 @@ public class UniversityGUI extends JFrame {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a new student to the selected faculty.
     private void addStudent() {
         Faculty selectedFaculty = getSelectedFaculty();
         if (selectedFaculty != null) {
@@ -98,6 +111,8 @@ public class UniversityGUI extends JFrame {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Removes the selected student from the selected faculty.
     private void removeStudent() {
         int selectedIndex = studentList.getSelectedIndex();
         if (selectedIndex != -1) {
@@ -110,6 +125,7 @@ public class UniversityGUI extends JFrame {
         }
     }
 
+    // EFFECTS: Saves the current state of the university and associated data to a JSON file.
     private void saveData() {
         try {
             JSONObject json = new JSONObject();
@@ -145,6 +161,7 @@ public class UniversityGUI extends JFrame {
         }
     }
 
+    // EFFECTS: Loads university state from a JSON file and updates the GUI.
     private void loadData() {
         try {
             FileReader reader = new FileReader(JSON_STORE);
@@ -185,6 +202,8 @@ public class UniversityGUI extends JFrame {
         }
     }
 
+    // MODIFIES: facultyListModel
+    // EFFECTS: Updates the faculty list with the current faculties.
     private void updateFacultyList() {
         facultyListModel.clear();
         for (Faculty faculty : university.getAllFaculties()) {
@@ -192,6 +211,8 @@ public class UniversityGUI extends JFrame {
         }
     }
 
+    // MODIFIES: studentListModel
+    // EFFECTS: Updates the student list based on the selected faculty.
     private void updateStudentList() {
         studentListModel.clear();
         Faculty selectedFaculty = getSelectedFaculty();
@@ -203,6 +224,7 @@ public class UniversityGUI extends JFrame {
         }
     }
 
+    // EFFECTS: Returns the selected faculty from the list.
     private Faculty getSelectedFaculty() {
         int selectedIndex = facultyList.getSelectedIndex();
         if (selectedIndex != -1) {
@@ -216,6 +238,8 @@ public class UniversityGUI extends JFrame {
         return null;
     }
 
+    // MODIFIES: this
+    // EFFECTS: Sets up the layout of the GUI using Swing components.
     private void designLayout() {
         setLayout(new BorderLayout());
         JPanel facultyPanel = new JPanel(new BorderLayout());
@@ -240,7 +264,7 @@ public class UniversityGUI extends JFrame {
         add(dataButtonPanel, BorderLayout.SOUTH);
     }
 
-
+    // EFFECTS: run the UniversityGUI application.
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new UniversityGUI());
     }
