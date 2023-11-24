@@ -1,0 +1,10 @@
+{
+    "name": "Bright Future University",
+    "faculties": [{
+        "name": "as",
+        "students": [{
+            "name": "dsa",
+            "gpa": 21
+        }]
+    }]
+}

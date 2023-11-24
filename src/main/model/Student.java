@@ -1,5 +1,9 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 // represent a student having a name, id, and a GPA
 public class Student {
 
@@ -26,6 +30,10 @@ public class Student {
         return this.id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public double getGpa() {
         return this.gpa;
     }
@@ -34,5 +42,12 @@ public class Student {
         this.gpa = gpa;
     }
 
-
+    //EFFECTS: returns the student as a json object
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("gpa", gpa);
+        json.put("id", id);
+        return json;
+    }
 }
