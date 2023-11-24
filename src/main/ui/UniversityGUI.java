@@ -103,7 +103,8 @@ public class UniversityGUI extends JFrame {
             if (studentName != null && !studentName.isEmpty()) {
                 double studentGpa = Double.parseDouble(JOptionPane.showInputDialog("Enter student GPA:"));
                 Student student = new Student(studentName, studentGpa);
-                List<Student> students = facultyStudentsMap.computeIfAbsent(selectedFaculty.getName(), k -> new ArrayList<>());
+                List<Student> students = facultyStudentsMap.computeIfAbsent(
+                        selectedFaculty.getName(), k -> new ArrayList<>());
                 students.add(student);
                 studentListModel.addElement(studentName);
             }
