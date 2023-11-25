@@ -49,11 +49,15 @@ public class JsonReaderTest {
             List<Student> studentsF = faculties.get(0).getAllStudents();
             List<Student> studentsB = faculties.get(1).getAllStudents();
             assertEquals("Joe", studentsF.get(0).getName());
+            assertEquals(2000, studentsF.get(0).getId());
             assertEquals("Mo", studentsF.get(1).getName());
+            assertEquals(2001, studentsF.get(1).getId());
             assertEquals(3.5, studentsF.get(0).getGpa());
             assertEquals(2.5, studentsF.get(1).getGpa());
             assertEquals("Eric", studentsB.get(0).getName());
+            assertEquals(2002, studentsB.get(0).getId());
             assertEquals("Harrison", studentsB.get(1).getName());
+            assertEquals(2003, studentsB.get(1).getId());
             assertEquals(2.9, studentsB.get(0).getGpa());
             assertEquals(3.1, studentsB.get(1).getGpa());
         } catch (IOException e) {
