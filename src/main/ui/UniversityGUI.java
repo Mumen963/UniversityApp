@@ -109,9 +109,13 @@ public class UniversityGUI extends JFrame {
             if (studentName != null && !studentName.isEmpty()) {
                 double studentGpa = Double.parseDouble(JOptionPane.showInputDialog("Enter student GPA:"));
                 Student student = new Student(studentName, studentGpa);
+
                 List<Student> students = facultyStudentsMap.computeIfAbsent(
                         selectedFaculty.getName(), k -> new ArrayList<>());
                 students.add(student);
+
+                getSelectedFaculty().addStudent(student);
+
                 studentListModel.addElement(studentName);
             }
         }
@@ -148,11 +152,11 @@ public class UniversityGUI extends JFrame {
         try {
             university = jsonReader.read();
             JOptionPane.showMessageDialog(this, "Data loaded successfully!");
-            updateFacultyList();
-            updateStudentList();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error loading data.");
         }
+        updateFacultyList();
+        updateStudentList();
     }
 
     // MODIFIES: facultyListModel
@@ -170,7 +174,7 @@ public class UniversityGUI extends JFrame {
         studentListModel.clear();
         Faculty selectedFaculty = getSelectedFaculty();
         if (selectedFaculty != null) {
-            List<Student> students = facultyStudentsMap.get(selectedFaculty.getName());
+            List<Student> students = selectedFaculty.getAllStudents();
             for (Student student : students) {
                 studentListModel.addElement(student.getName());
             }
