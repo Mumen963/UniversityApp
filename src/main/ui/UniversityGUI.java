@@ -28,7 +28,7 @@ public class UniversityGUI extends JFrame {
     private DefaultListModel<String> studentListModel;
     private JList<String> studentList;
     private University university;
-    private Map<String, List<Student>> facultyStudentsMap;  //For associating faculty names with lists of students
+//    private Map<String, List<Student>> facultyStudentsMap;  //For associating faculty names with lists of students
 
     private JsonReader jsonReader;
     private JsonWriter jsonWriter;
@@ -39,7 +39,7 @@ public class UniversityGUI extends JFrame {
         super("University Application");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         university = new University("Bright Future University");
-        facultyStudentsMap = new HashMap<>();
+//        facultyStudentsMap = new HashMap<>();
         facultyListModel = new DefaultListModel<>();
         facultyList = new JList<>(facultyListModel);
         facultyList.addListSelectionListener(e -> updateStudentList());
@@ -83,7 +83,7 @@ public class UniversityGUI extends JFrame {
             Faculty faculty = new Faculty(facultyName);
             if (university.addFaculty(faculty)) {
                 facultyListModel.addElement(facultyName);
-                facultyStudentsMap.put(facultyName, new ArrayList<>());
+//                facultyStudentsMap.put(facultyName, new ArrayList<>());
             } else {
                 JOptionPane.showMessageDialog(this, "Faculty already exists!");
             }
@@ -96,7 +96,8 @@ public class UniversityGUI extends JFrame {
         int selectedIndex = facultyList.getSelectedIndex();
         if (selectedIndex != -1) {
             String removedFacultyName = facultyListModel.remove(selectedIndex);
-            facultyStudentsMap.remove(removedFacultyName);
+            university.getAllFaculties().removeIf(faculty -> faculty.getName().equals(removedFacultyName));
+//            facultyStudentsMap.remove(removedFacultyName);
         }
     }
 
@@ -110,9 +111,9 @@ public class UniversityGUI extends JFrame {
                 double studentGpa = Double.parseDouble(JOptionPane.showInputDialog("Enter student GPA:"));
                 Student student = new Student(studentName, studentGpa);
 
-                List<Student> students = facultyStudentsMap.computeIfAbsent(
-                        selectedFaculty.getName(), k -> new ArrayList<>());
-                students.add(student);
+//                List<Student> students = facultyStudentsMap.computeIfAbsent(
+//                        selectedFaculty.getName(), k -> new ArrayList<>());
+//                students.add(student);
 
                 getSelectedFaculty().addStudent(student);
 
@@ -129,8 +130,10 @@ public class UniversityGUI extends JFrame {
             String removedStudentName = studentListModel.remove(selectedIndex);
             Faculty selectedFaculty = getSelectedFaculty();
             if (selectedFaculty != null) {
-                List<Student> students = facultyStudentsMap.get(selectedFaculty.getName());
-                students.removeIf(student -> student.getName().equals(removedStudentName));
+//                List<Student> students = facultyStudentsMap.get(selectedFaculty.getName());
+//                students.removeIf(student -> student.getName().equals(removedStudentName));
+
+                getSelectedFaculty().getAllStudents().removeIf(student -> student.getName().equals(removedStudentName));
             }
         }
     }
