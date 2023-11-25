@@ -30,6 +30,9 @@ public class UniversityGUI extends JFrame {
     private University university;
     private Map<String, List<Student>> facultyStudentsMap;  //For associating faculty names with lists of students
 
+    private JsonReader jsonReader;
+    private JsonWriter jsonWriter;
+
     // MODIFIES: this
     // EFFECTS: Initializes the UniversityGUI.
     public UniversityGUI() {
@@ -49,6 +52,8 @@ public class UniversityGUI extends JFrame {
 //        setSize(550, 300);
         setVisible(true);
         pack();
+        jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
     }
 
     // MODIFIES: this
@@ -129,9 +134,8 @@ public class UniversityGUI extends JFrame {
     // EFFECTS: Saves the current state of the university and associated data to a JSON file.
     private void saveData() {
         try {
-            JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
             jsonWriter.open();
-            jsonWriter.write(university);  // Assuming university is an instance variable
+            jsonWriter.write(university);  // Assuming toJson() is a method in your University class
             jsonWriter.close();
             JOptionPane.showMessageDialog(this, "Data saved successfully!");
         } catch (FileNotFoundException e) {
@@ -142,16 +146,10 @@ public class UniversityGUI extends JFrame {
     // EFFECTS: Loads university state from a JSON file and updates the GUI.
     private void loadData() {
         try {
-            JsonReader jsonReader = new JsonReader(JSON_STORE);
-            University loadedUniversity = jsonReader.read();
-            if (loadedUniversity != null) {
-                university = loadedUniversity;
-                updateFacultyList();
-                updateStudentList();
-                JOptionPane.showMessageDialog(this, "Data loaded successfully!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Error loading data.");
-            }
+            university = jsonReader.read();
+            JOptionPane.showMessageDialog(this, "Data loaded successfully!");
+            updateFacultyList();
+            updateStudentList();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error loading data.");
         }
