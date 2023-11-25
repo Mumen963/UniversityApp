@@ -1,5 +1,7 @@
 package ui;
 
+import persistence.JsonWriter;
+import persistence.JsonReader;
 import model.Faculty;
 import model.Student;
 import model.University;
@@ -8,6 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -124,80 +127,32 @@ public class UniversityGUI extends JFrame {
     }
 
     // EFFECTS: Saves the current state of the university and associated data to a JSON file.
-    @SuppressWarnings("methodlength")
     private void saveData() {
         try {
-            JSONObject json = new JSONObject();
-            json.put("name", university.getName());
-
-            JSONArray facultiesArray = new JSONArray();
-            for (Faculty faculty : university.getAllFaculties()) {
-                JSONObject facultyJson = new JSONObject();
-                facultyJson.put("name", faculty.getName());
-
-                JSONArray studentsArray = new JSONArray();
-                List<Student> students = facultyStudentsMap.get(faculty.getName());
-                for (Student student : students) {
-                    JSONObject studentJson = new JSONObject();
-                    studentJson.put("name", student.getName());
-                    studentJson.put("gpa", student.getGpa());
-                    studentsArray.put(studentJson);
-                }
-
-                facultyJson.put("students", studentsArray);
-                facultiesArray.put(facultyJson);
-            }
-
-            json.put("faculties", facultiesArray);
-
-            FileWriter writer = new FileWriter(JSON_STORE);
-            writer.write(json.toString(4));
-            writer.close();
-
+            JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+            jsonWriter.open();
+            jsonWriter.write(university);  // Assuming university is an instance variable
+            jsonWriter.close();
             JOptionPane.showMessageDialog(this, "Data saved successfully!");
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(this, "Error saving data.");
         }
     }
 
     // EFFECTS: Loads university state from a JSON file and updates the GUI.
-    @SuppressWarnings("methodlength")
     private void loadData() {
         try {
-            FileReader reader = new FileReader(JSON_STORE);
-            JSONObject json = new JSONObject(new JSONTokener(reader));
-            university = new University(json.getString("name"));
-            JSONArray facultiesArray = json.getJSONArray("faculties");
-
-            for (Object facultyObj : facultiesArray) {
-                JSONObject facultyJson = (JSONObject) facultyObj;
-                String facultyName = facultyJson.getString("name");
-                Faculty faculty = new Faculty(facultyName);
-                university.addFaculty(faculty);
-
-                JSONArray studentsArray = facultyJson.getJSONArray("students");
-                List<Student> students = new ArrayList<>();
-
-                for (Object studentObj : studentsArray) {
-                    JSONObject studentJson = (JSONObject) studentObj;
-                    String studentName = studentJson.getString("name");
-                    double studentGpa = studentJson.getDouble("gpa");
-                    Student student = new Student(studentName, studentGpa);
-                    students.add(student);
-                }
-
-                facultyStudentsMap.put(facultyName, students);
+            JsonReader jsonReader = new JsonReader(JSON_STORE);
+            University loadedUniversity = jsonReader.read();
+            if (loadedUniversity != null) {
+                university = loadedUniversity;
+                updateFacultyList();
+                updateStudentList();
+                JOptionPane.showMessageDialog(this, "Data loaded successfully!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error loading data.");
             }
-
-            updateFacultyList();
-            updateStudentList();
-
-            reader.close();
-            JOptionPane.showMessageDialog(this, "Data loaded successfully!");
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(this, "No saved data found.");
         } catch (IOException e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error loading data.");
         }
     }
