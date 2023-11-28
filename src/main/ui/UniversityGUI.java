@@ -5,18 +5,12 @@ import persistence.JsonReader;
 import model.Faculty;
 import model.Student;
 import model.University;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.*;
 import java.util.List;
-
 
 // UniversityGUI class represents a graphical user interface for managing faculties and students in a university.
 public class UniversityGUI extends JFrame {
@@ -28,7 +22,6 @@ public class UniversityGUI extends JFrame {
     private DefaultListModel<String> studentListModel;
     private JList<String> studentList;
     private University university;
-//    private Map<String, List<Student>> facultyStudentsMap;  //For associating faculty names with lists of students
 
     private JsonReader jsonReader;
     private JsonWriter jsonWriter;
@@ -39,7 +32,8 @@ public class UniversityGUI extends JFrame {
         super("University Application");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         university = new University("Bright Future University");
-//        facultyStudentsMap = new HashMap<>();
+        jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
         facultyListModel = new DefaultListModel<>();
         facultyList = new JList<>(facultyListModel);
         facultyList.addListSelectionListener(e -> updateStudentList());
@@ -49,11 +43,8 @@ public class UniversityGUI extends JFrame {
         JScrollPane studentScrollPane = new JScrollPane(studentList);
         createAndAddButtons();
         designLayout();
-//        setSize(550, 300);
         setVisible(true);
         pack();
-        jsonReader = new JsonReader(JSON_STORE);
-        jsonWriter = new JsonWriter(JSON_STORE);
     }
 
     // MODIFIES: this
@@ -83,7 +74,6 @@ public class UniversityGUI extends JFrame {
             Faculty faculty = new Faculty(facultyName);
             if (university.addFaculty(faculty)) {
                 facultyListModel.addElement(facultyName);
-//                facultyStudentsMap.put(facultyName, new ArrayList<>());
             } else {
                 JOptionPane.showMessageDialog(this, "Faculty already exists!");
             }
@@ -97,7 +87,6 @@ public class UniversityGUI extends JFrame {
         if (selectedIndex != -1) {
             String removedFacultyName = facultyListModel.remove(selectedIndex);
             university.getAllFaculties().removeIf(faculty -> faculty.getName().equals(removedFacultyName));
-//            facultyStudentsMap.remove(removedFacultyName);
         }
     }
 
@@ -110,13 +99,7 @@ public class UniversityGUI extends JFrame {
             if (studentName != null && !studentName.isEmpty()) {
                 double studentGpa = Double.parseDouble(JOptionPane.showInputDialog("Enter student GPA:"));
                 Student student = new Student(studentName, studentGpa);
-
-//                List<Student> students = facultyStudentsMap.computeIfAbsent(
-//                        selectedFaculty.getName(), k -> new ArrayList<>());
-//                students.add(student);
-
                 getSelectedFaculty().addStudent(student);
-
                 studentListModel.addElement(studentName);
             }
         }
@@ -130,9 +113,6 @@ public class UniversityGUI extends JFrame {
             String removedStudentName = studentListModel.remove(selectedIndex);
             Faculty selectedFaculty = getSelectedFaculty();
             if (selectedFaculty != null) {
-//                List<Student> students = facultyStudentsMap.get(selectedFaculty.getName());
-//                students.removeIf(student -> student.getName().equals(removedStudentName));
-
                 getSelectedFaculty().getAllStudents().removeIf(student -> student.getName().equals(removedStudentName));
             }
         }
@@ -142,7 +122,7 @@ public class UniversityGUI extends JFrame {
     private void saveData() {
         try {
             jsonWriter.open();
-            jsonWriter.write(university);  // Assuming toJson() is a method in your University class
+            jsonWriter.write(university);
             jsonWriter.close();
             JOptionPane.showMessageDialog(this, "Data saved successfully!");
         } catch (FileNotFoundException e) {
