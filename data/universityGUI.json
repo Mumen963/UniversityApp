@@ -2,12 +2,16 @@
     "name": "Bright Future University",
     "faculties": [
         {
-            "name": "s",
+            "name": "Science",
             "students": []
         },
         {
-            "name": "ss",
-            "students": []
+            "name": "Arts",
+            "students": [{
+                "name": "Sara",
+                "gpa": 3,
+                "id": 1002
+            }]
         }
     ]
 }

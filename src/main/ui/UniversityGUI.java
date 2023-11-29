@@ -129,10 +129,12 @@ public class UniversityGUI extends JFrame {
     private void removeStudent() {
         int selectedIndex = studentList.getSelectedIndex();
         if (selectedIndex != -1) {
-            String removedStudentName = studentListModel.remove(selectedIndex);
+//            String removedStudentName = studentListModel.remove(selectedIndex);
             Faculty selectedFaculty = getSelectedFaculty();
             if (selectedFaculty != null) {
-                getSelectedFaculty().getAllStudents().removeIf(student -> student.getName().equals(removedStudentName));
+//                getSelectedFaculty().getAllStudents().removeIf(student -> student.getName().equals(removedStudentName));
+                getSelectedFaculty().removeStudent(getSelectedStudent(selectedIndex));
+                studentListModel.remove(selectedIndex);
             }
         }
     }
@@ -204,6 +206,19 @@ public class UniversityGUI extends JFrame {
             for (Faculty faculty : university.getAllFaculties()) {
                 if (faculty.getName().equals(selectedFacultyName)) {
                     return faculty;
+                }
+            }
+        }
+        return null;
+    }
+
+    // EFFECTS: Returns the selected student from the list.
+    private Student getSelectedStudent(int selectedIndex) {
+        if (selectedIndex != -1) {
+            String selectedStudentName = studentListModel.get(selectedIndex);
+            for (Student student : getSelectedFaculty().getAllStudents()) {
+                if (student.getName().equals(selectedStudentName)) {
+                    return student;
                 }
             }
         }
