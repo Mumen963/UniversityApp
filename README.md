@@ -29,7 +29,56 @@
 
 ### Phase 4 Task 2 
 
+Wed Nov 29 15:05:54 PST 2023
+Faculty added : Science
 
+*Wed Nov 29 15:05:56 PST 2023*
+*Faculty added : Arts*
+
+*Wed Nov 29 15:06:04 PST 2023*
+*Faculty added : Computer Science*
+
+*Wed Nov 29 15:06:07 PST 2023*
+*Faculty added : Physics*
+
+*Wed Nov 29 15:06:12 PST 2023*
+*A student called Alex added to the following faculty : Science*
+
+*Wed Nov 29 15:06:16 PST 2023*
+*A student called Sara added to the following faculty : Science*
+
+*Wed Nov 29 15:06:22 PST 2023*
+*A student called Emily added to the following faculty : Arts*
+
+*Wed Nov 29 15:06:27 PST 2023*
+*A student called Sally added to the following faculty : Arts*
+
+*Wed Nov 29 15:06:32 PST 2023*
+*A student called Alex added to the following faculty : Computer Science*
+
+*Wed Nov 29 15:06:35 PST 2023*
+*A student called Mo added to the following faculty : Computer Science*
+
+*Wed Nov 29 15:06:37 PST 2023*
+*A student called Mo removed from the following faculty : Computer Science*
+
+*Wed Nov 29 15:06:39 PST 2023*
+*A student called Alex removed from the following faculty : Computer Science*
+
+*Wed Nov 29 15:06:41 PST 2023*
+*A student called Sally removed from the following faculty : Arts*
+
+*Wed Nov 29 15:06:43 PST 2023*
+*A student called Emily removed from the following faculty : Arts*
+
+*Wed Nov 29 15:06:44 PST 2023*
+*Faculty removed : Arts*
+
+*Wed Nov 29 15:06:47 PST 2023*
+*Faculty removed : Computer Science*
+
+*Wed Nov 29 15:06:48 PST 2023*
+*Data saved*
 
 ### Phase 4 Task 3
 In the current design, the university has a name and a list of faculties. Likewise, each faculty has a name and a list of students. Getting a student directly from the university is not possible. Therefore, having a Map in university to store faculties and corresponding students makes things better. This way, university will have lists of faculties and corresponding students and accessing students directly from the university will be easier 
