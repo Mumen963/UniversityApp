@@ -1,10 +1,24 @@
 {
     "name": "Bright Future University",
-    "faculties": [{
-        "name": "as",
-        "students": [{
-            "name": "dsa",
-            "gpa": 21
-        }]
-    }]
+    "faculties": [
+        {
+            "name": "jkhgk",
+            "students": []
+        },
+        {
+            "name": "dssd",
+            "students": [
+                {
+                    "name": "dsds",
+                    "gpa": 22,
+                    "id": 1000
+                },
+                {
+                    "name": "dss",
+                    "gpa": 212,
+                    "id": 1001
+                }
+            ]
+        }
+    ]
 }

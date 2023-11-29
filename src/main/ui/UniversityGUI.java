@@ -1,24 +1,18 @@
 package ui;
 
+import persistence.JsonWriter;
+import persistence.JsonReader;
 import model.Faculty;
 import model.Student;
 import model.University;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-import persistence.Writable;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.*;
 import java.util.List;
 
-
 // UniversityGUI class represents a graphical user interface for managing faculties and students in a university.
-
 public class UniversityGUI extends JFrame {
 
     private static final String JSON_STORE = "./data/universityGUI.json";
@@ -27,8 +21,10 @@ public class UniversityGUI extends JFrame {
     private JList<String> facultyList;
     private DefaultListModel<String> studentListModel;
     private JList<String> studentList;
+
     private University university;
-    private Map<String, List<Student>> facultyStudentsMap;  //For associating faculty names with lists of students
+    private JsonReader jsonReader;
+    private JsonWriter jsonWriter;
 
     // MODIFIES: this
     // EFFECTS: Initializes the UniversityGUI.
@@ -36,7 +32,8 @@ public class UniversityGUI extends JFrame {
         super("University Application");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         university = new University("Bright Future University");
-        facultyStudentsMap = new HashMap<>();
+        jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
         facultyListModel = new DefaultListModel<>();
         facultyList = new JList<>(facultyListModel);
         facultyList.addListSelectionListener(e -> updateStudentList());
@@ -46,12 +43,11 @@ public class UniversityGUI extends JFrame {
         JScrollPane studentScrollPane = new JScrollPane(studentList);
         createAndAddButtons();
         designLayout();
-//        setSize(550, 300);
         setVisible(true);
         pack();
     }
 
-        // MODIFIES: this
+    // MODIFIES: this
     // EFFECTS: Creates and adds buttons to the GUI.
     private void createAndAddButtons() {
         createButton("Add Faculty", e -> addFaculty());
@@ -78,7 +74,6 @@ public class UniversityGUI extends JFrame {
             Faculty faculty = new Faculty(facultyName);
             if (university.addFaculty(faculty)) {
                 facultyListModel.addElement(facultyName);
-                facultyStudentsMap.put(facultyName, new ArrayList<>());
             } else {
                 JOptionPane.showMessageDialog(this, "Faculty already exists!");
             }
@@ -91,7 +86,7 @@ public class UniversityGUI extends JFrame {
         int selectedIndex = facultyList.getSelectedIndex();
         if (selectedIndex != -1) {
             String removedFacultyName = facultyListModel.remove(selectedIndex);
-            facultyStudentsMap.remove(removedFacultyName);
+            university.getAllFaculties().removeIf(faculty -> faculty.getName().equals(removedFacultyName));
         }
     }
 
@@ -104,8 +99,7 @@ public class UniversityGUI extends JFrame {
             if (studentName != null && !studentName.isEmpty()) {
                 double studentGpa = Double.parseDouble(JOptionPane.showInputDialog("Enter student GPA:"));
                 Student student = new Student(studentName, studentGpa);
-                List<Student> students = facultyStudentsMap.computeIfAbsent(selectedFaculty.getName(), k -> new ArrayList<>());
-                students.add(student);
+                getSelectedFaculty().addStudent(student);
                 studentListModel.addElement(studentName);
             }
         }
@@ -119,8 +113,7 @@ public class UniversityGUI extends JFrame {
             String removedStudentName = studentListModel.remove(selectedIndex);
             Faculty selectedFaculty = getSelectedFaculty();
             if (selectedFaculty != null) {
-                List<Student> students = facultyStudentsMap.get(selectedFaculty.getName());
-                students.removeIf(student -> student.getName().equals(removedStudentName));
+                getSelectedFaculty().getAllStudents().removeIf(student -> student.getName().equals(removedStudentName));
             }
         }
     }
@@ -128,35 +121,11 @@ public class UniversityGUI extends JFrame {
     // EFFECTS: Saves the current state of the university and associated data to a JSON file.
     private void saveData() {
         try {
-            JSONObject json = new JSONObject();
-            json.put("name", university.getName());
-
-            JSONArray facultiesArray = new JSONArray();
-            for (Faculty faculty : university.getAllFaculties()) {
-                JSONObject facultyJson = new JSONObject();
-                facultyJson.put("name", faculty.getName());
-
-                JSONArray studentsArray = new JSONArray();
-                List<Student> students = facultyStudentsMap.get(faculty.getName());
-                for (Student student : students) {
-                    JSONObject studentJson = new JSONObject();
-                    studentJson.put("name", student.getName());
-                    studentJson.put("gpa", student.getGpa());
-                    studentsArray.put(studentJson);
-                }
-
-                facultyJson.put("students", studentsArray);
-                facultiesArray.put(facultyJson);
-            }
-
-            json.put("faculties", facultiesArray);
-
-            FileWriter writer = new FileWriter(JSON_STORE);
-            writer.write(json.toString(4));
-            writer.close();
-
+            jsonWriter.open();
+            jsonWriter.write(university);
+            jsonWriter.close();
             JOptionPane.showMessageDialog(this, "Data saved successfully!");
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(this, "Error saving data.");
         }
     }
@@ -164,42 +133,13 @@ public class UniversityGUI extends JFrame {
     // EFFECTS: Loads university state from a JSON file and updates the GUI.
     private void loadData() {
         try {
-            FileReader reader = new FileReader(JSON_STORE);
-            JSONObject json = new JSONObject(new JSONTokener(reader));
-            university = new University(json.getString("name"));
-            JSONArray facultiesArray = json.getJSONArray("faculties");
-
-            for (Object facultyObj : facultiesArray) {
-                JSONObject facultyJson = (JSONObject) facultyObj;
-                String facultyName = facultyJson.getString("name");
-                Faculty faculty = new Faculty(facultyName);
-                university.addFaculty(faculty);
-
-                JSONArray studentsArray = facultyJson.getJSONArray("students");
-                List<Student> students = new ArrayList<>();
-
-                for (Object studentObj : studentsArray) {
-                    JSONObject studentJson = (JSONObject) studentObj;
-                    String studentName = studentJson.getString("name");
-                    double studentGpa = studentJson.getDouble("gpa");
-                    Student student = new Student(studentName, studentGpa);
-                    students.add(student);
-                }
-
-                facultyStudentsMap.put(facultyName, students);
-            }
-
-            updateFacultyList();
-            updateStudentList();
-
-            reader.close();
+            university = jsonReader.read();
             JOptionPane.showMessageDialog(this, "Data loaded successfully!");
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(this, "No saved data found.");
         } catch (IOException e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error loading data.");
         }
+        updateFacultyList();
+        updateStudentList();
     }
 
     // MODIFIES: facultyListModel
@@ -217,7 +157,7 @@ public class UniversityGUI extends JFrame {
         studentListModel.clear();
         Faculty selectedFaculty = getSelectedFaculty();
         if (selectedFaculty != null) {
-            List<Student> students = facultyStudentsMap.get(selectedFaculty.getName());
+            List<Student> students = selectedFaculty.getAllStudents();
             for (Student student : students) {
                 studentListModel.addElement(student.getName());
             }
