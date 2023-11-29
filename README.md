@@ -80,5 +80,6 @@ Faculty added : Science
 *Wed Nov 29 15:06:48 PST 2023*
 *Data saved*
 
+
 ### Phase 4 Task 3
-In the current design, the university has a name and a list of faculties. Likewise, each faculty has a name and a list of students. Getting a student directly from the university is not possible. Therefore, having a Map in university to store faculties and corresponding students makes things better. This way, university will have lists of faculties and corresponding lists of students for each faculty, and accessing students directly from the university will be possible. 
+In the current design, the university has a name and a list of faculties. Likewise, each faculty has a name and a list of students. Getting a student directly from the university is not possible. Therefore, having a Map in university to store faculties and corresponding students makes things better. This way, university will have lists of faculties and corresponding lists of students for each faculty, and accessing students directly from the university will be possible.  
