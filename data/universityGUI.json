@@ -2,23 +2,35 @@
     "name": "Bright Future University",
     "faculties": [
         {
-            "name": "Science",
+            "name": "ada",
+            "students": []
+        },
+        {
+            "name": "adw",
+            "students": []
+        },
+        {
+            "name": "daw",
+            "students": []
+        },
+        {
+            "name": "dawfa",
+            "students": []
+        },
+        {
+            "name": "aefaee",
             "students": [
                 {
-                    "name": "Alex",
-                    "gpa": 3,
+                    "name": "SDA",
+                    "gpa": 2,
                     "id": 1000
                 },
                 {
-                    "name": "Sara",
-                    "gpa": 3,
+                    "name": "DAWDA",
+                    "gpa": 21,
                     "id": 1001
                 }
             ]
-        },
-        {
-            "name": "Physics",
-            "students": []
         }
     ]
 }
