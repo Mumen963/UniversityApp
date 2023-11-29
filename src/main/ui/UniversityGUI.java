@@ -21,8 +21,8 @@ public class UniversityGUI extends JFrame {
     private JList<String> facultyList;
     private DefaultListModel<String> studentListModel;
     private JList<String> studentList;
-    private University university;
 
+    private University university;
     private JsonReader jsonReader;
     private JsonWriter jsonWriter;
 

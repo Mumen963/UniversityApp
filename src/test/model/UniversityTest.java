@@ -71,4 +71,25 @@ class UniversityTest {
         assertEquals(faculty2, faculties.get(1));
     }
 
+    @Test
+    public void testRemoveFacultyOnce() {
+        assertTrue(universityTest.addFaculty(faculty1));
+        List<Faculty> faculties = universityTest.getAllFaculties();
+        assertEquals(1, faculties.size());
+        assertEquals(faculty1, faculties.get(0));
+        assertEquals("Science", faculties.get(0).getName());
+        assertTrue(universityTest.removeFaculty(faculty1));
+        assertEquals(0, faculties.size());
+        assertFalse(faculties.contains(faculty1));
+    }
+
+    @Test
+    public void testRemoveFacultyNotAdded() {
+        assertTrue(universityTest.addFaculty(faculty1));
+        assertFalse(universityTest.removeFaculty(faculty2));
+        List<Faculty> faculties = universityTest.getAllFaculties();
+        assertEquals(1, faculties.size());
+        assertTrue(faculties.contains(faculty1));
+        assertFalse(faculties.contains(faculty2));
+    }
 }

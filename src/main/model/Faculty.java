@@ -29,6 +29,7 @@ public class Faculty implements Writable {
     public boolean addStudent(Student student) {
         if (!students.contains(student)) {
             students.add(student);
+            EventLog.getInstance().logEvent(new Event("Student " + student.getName() + " added to " + getName()));
             return true;
         }
         return false;
@@ -41,6 +42,7 @@ public class Faculty implements Writable {
     public boolean removeStudent(Student student) {
         if (students.contains(student)) {
             students.remove(student);
+            EventLog.getInstance().logEvent(new Event("Student " + student.getName() + " removed from " + getName()));
             return true;
         }
         return false;

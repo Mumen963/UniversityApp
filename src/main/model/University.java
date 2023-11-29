@@ -27,13 +27,25 @@ public class University implements Writable {
     // and return false. items are maintained in the order
     // in which they were added
     public boolean addFaculty(Faculty faculty) {
-        for (Faculty f : faculties) {
-            if (faculty.getName().equals(f.getName())) {
-                return false;
-            }
+        if (!faculties.contains(faculty)) {
+            faculties.add(faculty);
+            EventLog.getInstance().logEvent(new Event("Faculty added : " + faculty.getName()));
+            return true;
         }
-        faculties.add(faculty);
-        return true;
+        return false;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: remove a faculty from the list of the university faculties
+    // amd return true. if the faculty is not in the list, do nothing
+    // and return false
+    public boolean removeFaculty(Faculty faculty) {
+        if (faculties.contains(faculty)) {
+            faculties.remove(faculty);
+            EventLog.getInstance().logEvent(new Event("Faculty removed : " + faculty.getName()));
+            return true;
+        }
+        return false;
     }
 
     // EFFECTS: returns the name of the university
