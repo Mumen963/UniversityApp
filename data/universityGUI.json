@@ -3,15 +3,22 @@
     "faculties": [
         {
             "name": "Science",
-            "students": []
+            "students": [
+                {
+                    "name": "Alex",
+                    "gpa": 3,
+                    "id": 1000
+                },
+                {
+                    "name": "Sara",
+                    "gpa": 3,
+                    "id": 1001
+                }
+            ]
         },
         {
-            "name": "Arts",
-            "students": [{
-                "name": "Sara",
-                "gpa": 3,
-                "id": 1002
-            }]
+            "name": "Physics",
+            "students": []
         }
     ]
 }

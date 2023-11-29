@@ -60,7 +60,7 @@ public class UniversityGUI extends JFrame {
     //EFFECTS : prints all important events as the app closes
     private void handleWindowClosing() {
         for (Event e : EventLog.getInstance()) {
-            System.out.println(e);
+            System.out.println(e + "\n");
         }
     }
 
