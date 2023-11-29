@@ -1,14 +1,15 @@
 package ui;
 
+import model.*;
+import model.Event;
 import persistence.JsonWriter;
 import persistence.JsonReader;
-import model.Faculty;
-import model.Student;
-import model.University;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.*;
 import java.util.List;
 
@@ -32,6 +33,15 @@ public class UniversityGUI extends JFrame {
         super("University Application");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         university = new University("Bright Future University");
+
+        // Add a WindowListener to handle window closing events
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                handleWindowClosing();
+            }
+        });
+
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
         facultyListModel = new DefaultListModel<>();
@@ -46,6 +56,14 @@ public class UniversityGUI extends JFrame {
         setVisible(true);
         pack();
     }
+
+    //EFFECTS : prints all important events as the app closes
+    private void handleWindowClosing() {
+        for (Event e : EventLog.getInstance()) {
+            System.out.println(e + "\n");
+        }
+    }
+
 
     // MODIFIES: this
     // EFFECTS: Creates and adds buttons to the GUI.
@@ -85,8 +103,9 @@ public class UniversityGUI extends JFrame {
     private void removeFaculty() {
         int selectedIndex = facultyList.getSelectedIndex();
         if (selectedIndex != -1) {
-            String removedFacultyName = facultyListModel.remove(selectedIndex);
-            university.getAllFaculties().removeIf(faculty -> faculty.getName().equals(removedFacultyName));
+            university.removeFaculty(getSelectedFaculty(selectedIndex));
+            facultyListModel.remove(selectedIndex);
+
         }
     }
 
@@ -110,10 +129,12 @@ public class UniversityGUI extends JFrame {
     private void removeStudent() {
         int selectedIndex = studentList.getSelectedIndex();
         if (selectedIndex != -1) {
-            String removedStudentName = studentListModel.remove(selectedIndex);
+//            String removedStudentName = studentListModel.remove(selectedIndex);
             Faculty selectedFaculty = getSelectedFaculty();
             if (selectedFaculty != null) {
-                getSelectedFaculty().getAllStudents().removeIf(student -> student.getName().equals(removedStudentName));
+//                getSelectedFaculty().getAllStudents().removeIf(student -> student.getName().equals(removedStudentName));
+                getSelectedFaculty().removeStudent(getSelectedStudent(selectedIndex));
+                studentListModel.remove(selectedIndex);
             }
         }
     }
@@ -172,6 +193,32 @@ public class UniversityGUI extends JFrame {
             for (Faculty faculty : university.getAllFaculties()) {
                 if (faculty.getName().equals(selectedFacultyName)) {
                     return faculty;
+                }
+            }
+        }
+        return null;
+    }
+
+    // EFFECTS: Returns the selected faculty from the list.
+    private Faculty getSelectedFaculty(int selectedIndex) {
+        if (selectedIndex != -1) {
+            String selectedFacultyName = facultyListModel.get(selectedIndex);
+            for (Faculty faculty : university.getAllFaculties()) {
+                if (faculty.getName().equals(selectedFacultyName)) {
+                    return faculty;
+                }
+            }
+        }
+        return null;
+    }
+
+    // EFFECTS: Returns the selected student from the list.
+    private Student getSelectedStudent(int selectedIndex) {
+        if (selectedIndex != -1) {
+            String selectedStudentName = studentListModel.get(selectedIndex);
+            for (Student student : getSelectedFaculty().getAllStudents()) {
+                if (student.getName().equals(selectedStudentName)) {
+                    return student;
                 }
             }
         }
