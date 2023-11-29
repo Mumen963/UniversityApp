@@ -127,10 +127,8 @@ public class UniversityGUI extends JFrame {
     private void removeStudent() {
         int selectedIndex = studentList.getSelectedIndex();
         if (selectedIndex != -1) {
-//            String removedStudentName = studentListModel.remove(selectedIndex);
             Faculty selectedFaculty = getSelectedFaculty();
             if (selectedFaculty != null) {
-//                getSelectedFaculty().getAllStudents().removeIf(student -> student.getName().equals(removedStudentName));
                 getSelectedFaculty().removeStudent(getSelectedStudent(selectedIndex));
                 studentListModel.remove(selectedIndex);
             }
