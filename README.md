@@ -15,7 +15,7 @@
 - *As a user, I want to have the option to save my university data to a file*
 - *As a user, I want to have the option to load my university data from a file*
 
-# Instructions for Grader
+### Instructions for Grader
 
 - You can add a new faculty using the Add Faculty button
 - You can remove faculty using the Remove Faculty button
@@ -24,3 +24,12 @@
 - You can locate my visual component in the data package
 - You can save the state of the university using the Save Data button
 - You can reload the state of the university using the Load Data button
+
+
+
+### Phase 4 Task 2 
+
+
+
+### Phase 4 Task 3
+In the current design, the university has a name and a list of faculties. Likewise, each faculty has a name and a list of students. Getting a student directly from the university is not possible. Therefore, having a Map in university to store faculties and corresponding students makes things better. This way, university will have lists of faculties and corresponding students and accessing students directly from the university will be easier 
