@@ -34,7 +34,6 @@ public class UniversityGUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         university = new University("Bright Future University");
 
-        // Add a WindowListener to handle window closing events
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -63,7 +62,6 @@ public class UniversityGUI extends JFrame {
             System.out.println(e + "\n");
         }
     }
-
 
     // MODIFIES: this
     // EFFECTS: Creates and adds buttons to the GUI.
@@ -129,10 +127,8 @@ public class UniversityGUI extends JFrame {
     private void removeStudent() {
         int selectedIndex = studentList.getSelectedIndex();
         if (selectedIndex != -1) {
-//            String removedStudentName = studentListModel.remove(selectedIndex);
             Faculty selectedFaculty = getSelectedFaculty();
             if (selectedFaculty != null) {
-//                getSelectedFaculty().getAllStudents().removeIf(student -> student.getName().equals(removedStudentName));
                 getSelectedFaculty().removeStudent(getSelectedStudent(selectedIndex));
                 studentListModel.remove(selectedIndex);
             }
