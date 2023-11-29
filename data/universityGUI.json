@@ -2,23 +2,12 @@
     "name": "Bright Future University",
     "faculties": [
         {
-            "name": "jkhgk",
+            "name": "s",
             "students": []
         },
         {
-            "name": "dssd",
-            "students": [
-                {
-                    "name": "dsds",
-                    "gpa": 22,
-                    "id": 1000
-                },
-                {
-                    "name": "dss",
-                    "gpa": 212,
-                    "id": 1001
-                }
-            ]
+            "name": "ss",
+            "students": []
         }
     ]
 }

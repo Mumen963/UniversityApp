@@ -1,8 +1,6 @@
 package persistence;
 
-import model.University;
-import model.Student;
-import model.Faculty;
+import model.*;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -45,6 +43,7 @@ public class JsonReader {
         String name = jsonObject.getString("name");
         University university = new University(name);
         addFaculties(university, jsonObject);
+        EventLog.getInstance().logEvent(new Event("Data loaded"));
         return university;
     }
 
