@@ -103,7 +103,6 @@ public class UniversityGUI extends JFrame {
         if (selectedIndex != -1) {
             university.removeFaculty(getSelectedFaculty(selectedIndex));
             facultyListModel.remove(selectedIndex);
-
         }
     }
 
