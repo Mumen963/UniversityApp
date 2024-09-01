@@ -69,16 +69,16 @@ public class UniversityApp {
     //EFFECTS : displays menu of options to user
     private void displayMenu() {
         System.out.println("\nSelect from:");
-        System.out.println("1 -> Display faculties");
-        System.out.println("2 -> Add a new faculty");
-        System.out.println("3 -> Add a new student to faculty");
-        System.out.println("4 -> Remove a student from a faculty");
-        System.out.println("5 -> View all students in a faculty");
-        System.out.println("6 -> get number of students in a faculty");
-        System.out.println("7 -> add a new GPA for a student in a faculty");
-        System.out.println("8 -> get a student info");
-        System.out.println("9 - > save university data to file");
-        System.out.println("10 - > load university data from file");
+        System.out.println("1  -> Display faculties");
+        System.out.println("2  -> Add a new faculty");
+        System.out.println("3  -> Add a new student to faculty");
+        System.out.println("4  -> Remove a student from a faculty");
+        System.out.println("5  -> View all students in a faculty");
+        System.out.println("6  -> get number of students in a faculty");
+        System.out.println("7  -> add a new GPA for a student in a faculty");
+        System.out.println("8  -> get a student info");
+        System.out.println("9  -> save university data to file");
+        System.out.println("10 -> load university data from file");
         System.out.println("11 -> quit");
     }
 
@@ -122,7 +122,7 @@ public class UniversityApp {
     //EFFECTS: conducts adding a faculty
     private void addNewFaculty() {
         String facultyName;
-        System.out.println("Please enter the name of your faculty: ");
+        System.out.println("Please enter the name of the faculty: ");
         facultyName = input.next();
         university.addFaculty(new Faculty(facultyName));
         System.out.println("Done!");

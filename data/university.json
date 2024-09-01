@@ -25,19 +25,16 @@
             }]
         },
         {
-            "name": "Bio",
-            "students": [
-                {
-                    "name": "Mo",
-                    "gpa": 3.8,
-                    "id": 1003
-                },
-                {
-                    "name": "Ra",
-                    "gpa": 3.8,
-                    "id": 1004
-                }
-            ]
+            "name": "Business",
+            "students": [{
+                "name": "Sara",
+                "gpa": 3.8,
+                "id": 1003
+            }]
+        },
+        {
+            "name": "Forestry",
+            "students": []
         }
     ]
 }
